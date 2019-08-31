@@ -1,0 +1,32 @@
+{% extends "layout/basic.html" %}
+
+{% block title %}Блог: {{ blog.title }}{% endblock title %}
+
+{% block content %}
+	<h1>{{ blog.title }}</h1>
+	<p><span class="font-weight-bold">Post date</span> {{ blog.published|date:"M. d, Y" }}</p>
+	<p><span class="font-weight-bold">Author:</span> <a href="{{ blog.author.get_absolute_url }}">{{ blog.author }}</a></p>
+	<p><span class="font-weight-bold">Description:</span></p>
+	<p>{{ blog.description }}</p>
+	<div class="ml-4">
+		<h2 class="font-weight-light mb-3">Comments</h2>
+		<div>
+			<ul class="list-group">
+				{% for comment in comments %}
+				<li class="list-group-item border-left-0 border-right-0 pl-0">
+					<p>{{ comment.commentator }} ({{ comment.published }}) - {{comment.description }}</p>
+				</li>
+				{% endfor %}
+			</ul>
+			
+			{% if user.is_authenticated %}
+			<p class="mt-2"><a href="{% url 'blog:comment_create' blog.pk %}">Add a new comment</a></p>
+			{% else %}
+			<p class="mt-2"><a href="/accounts/login?next={{ request.get_full_path|urlencode }}">Login</a> to add a new comment</p>
+			
+			{% endif %}
+		</div>
+	</div>
+		
+{% endblock content %}
+

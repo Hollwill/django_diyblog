@@ -1,0 +1,14 @@
+{% extends "layout/basic.html" %}
+
+{% block title %}Registration{% endblock title %}
+
+{% block content %}
+	{% load bootstrap4 %}
+	<center>
+		<form method="post">
+		{% csrf_token %}
+		{% bootstrap_form form  %}
+		{% buttons submit='Register' %}{% endbuttons %}
+		</form>
+	</center>
+{% endblock content %}

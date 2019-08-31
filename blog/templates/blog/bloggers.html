@@ -1,0 +1,16 @@
+{% extends "layout/basic.html" %}
+
+{% block title %}All bloggers{% endblock title %}
+
+{% block content %}
+<h1 class="text-center">All bloggers</h1>
+<div>
+	<ul class="list-group">
+		{% for blogger in bloggers %}
+		<li class="list-group-item border-0 p-1">
+			<h4 class="text-center"><a href="{{ blogger.get_absolute_url}}">{{ blogger.name }}</a></h4>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endblock content %}

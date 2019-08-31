@@ -1,0 +1,21 @@
+{% extends "layout/basic.html" %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+<h2 class="text-center">LogIn</h2>
+{% if user.is_authenticated %}
+<p>Вы уже выполнили вход</p>
+{% else %}
+{% load bootstrap4 %}
+<center>
+	<form  method="post" action="">
+		{% csrf_token %}
+		{% bootstrap_form form layout='inline' field_class='col-40'  %}
+		{% buttons submit='LogIn' %}{% endbuttons %}
+	</form>
+</center>
+<p><a href="/accounts/register/">Register</a></p>
+
+{% endif %}
+{% endblock content %}

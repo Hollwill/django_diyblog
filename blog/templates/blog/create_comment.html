@@ -1,0 +1,22 @@
+{% extends "layout/basic.html" %}
+
+{% block title %}create comment{% endblock title %}
+
+{% block content %}
+	{% if user.is_authenticated %}
+		<h5>Post your comment for: <a href="{% url 'blog:blog_detail' blog.pk %}">{{ blog.title }}</a></h5>
+	{% load bootstrap4 %}
+	<form method="post">
+		{% csrf_token %}
+		{% bootstrap_form form layout="inline" form_group_class="m-0" %}
+		<p>Enter comment about blog here</p>
+		{% buttons submit='Sent' %}{% endbuttons %}
+	</form>
+	{% else %}
+	<div class="mb-5">
+		<p class="text-center"><a href="/accounts/login?next={{ request.get_full_path|urlencode }}">Login</a> previous to comment it</p>
+	</div>
+	{% endif %}
+	
+{% endblock content %}
+
